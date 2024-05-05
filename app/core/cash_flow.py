@@ -2,10 +2,12 @@ from app.service_layer import ServiceRepo
 
 
 class CashFlowCli:
-    def __init__(self):
+    def __init__(self) -> None:
+        """Initialize service repo"""
         self.service_repo = ServiceRepo()
 
-    def run(self):
+    def run(self) -> None:
+        """Runs the app and processes user option input"""
         self.service_repo.print_options()
 
         while True:

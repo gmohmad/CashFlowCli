@@ -1,3 +1,5 @@
+"""Options supported by the app"""
+
 OPTIONS = {
     "gb": "Get balance",
     "gi": "Get incomes",

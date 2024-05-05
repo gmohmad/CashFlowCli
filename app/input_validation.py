@@ -6,8 +6,8 @@ from .schemas import CategoryEnum, TransactionInputSchema, TransactionUpdateSche
 
 
 class ValidationRepo:
-
     def get_valid_balance_input(self) -> int:
+        """Prompts user for a valid balance input."""
         while True:
             balance = input(
                 "Whats your starting balance? (Enter a non-negative number) "
@@ -21,7 +21,7 @@ class ValidationRepo:
                 print("\nBalance should be a non-negative number. Please try again.\n")
 
     def get_valid_amount_input(self, required: bool = True) -> int | None:
-        """Prompt the user for a valid amount input."""
+        """Prompts user for a valid amount input."""
         while True:
             amount_input = input("\nEnter the amount (A positive number|Cancel -- c): ")
             if amount_input == "c":
@@ -38,7 +38,7 @@ class ValidationRepo:
                 print("Amount should be a positive number. Please try again.\n")
 
     def get_valid_date_input(self, required: bool = True) -> datetime.date | None:
-        """Prompt the user for a valid date input."""
+        """Prompts user for a valid date input."""
         while True:
             date_input = input("Enter the date (YYYY-MM-DD) or type 't' to autofill: ")
             if not required and date_input == "":
@@ -53,7 +53,7 @@ class ValidationRepo:
                 print("Invalid date format. Please try again.\n")
 
     def get_valid_category_input(self, required: bool = True) -> str | None:
-        """Prompt the user for a valid category input."""
+        """Prompts user for a valid category input."""
         while True:
             category_input = input("Enter the category (expenses|incomes): ")
             if not required and category_input == "":
@@ -65,7 +65,7 @@ class ValidationRepo:
                 print("Invalid category. Please try again.\n")
 
     def get_valid_id_input(self, db_repo: DBRepo) -> uuid.UUID | None:
-        """Prompt the user for a valid id input."""
+        """Prompts user for a valid id input."""
         while True:
             try:
                 id_input = input(
@@ -86,7 +86,7 @@ class ValidationRepo:
     def get_transaction_from_input(
         self, required: bool = True
     ) -> TransactionInputSchema | TransactionUpdateSchema | None:
-        """"""
+        """Builds a transaction based on the user's input and returns it"""
         Schema = TransactionInputSchema if required else TransactionUpdateSchema
 
         if required:
