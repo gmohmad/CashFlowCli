@@ -1,5 +1,17 @@
 # CashFlowCli
 
+## App description
+
+- Type annotations, docstrings
+- A json file for db
+- Repository design pattern
+- OOP
+- pydantic for data validation/type hinting
+- 8 possible options, from viewing current balance to filtering transactions
+- full cli experience
+(no test yet, might add them in the future if i have time)
+
+
 ## Project startup
 
 ### 1. Clone the repo
