@@ -77,19 +77,14 @@ class DBRepo:
         """Updates transaction with given id and updates balance if it exists"""
         transaction = self.get_transaction_by_id(id)
 
-        if transaction is None:
-            raise LookupError("A transaction with this id does not exist")
-
         if new_data.Amount:
             self.restore_balance(transaction["Category"], transaction["Amount"])
             self.update_balance(
                 new_data.Category or transaction["Category"], new_data.Amount
             )
-        if not new_data.Amount and new_data.Category:
+        elif new_data.Category:
             self.restore_balance(transaction["Category"], transaction["Amount"])
-            self.update_balance(
-                new_data.Category or transaction["Category"], transaction["Amount"]
-            )
+            self.update_balance(new_data.Category, transaction["Amount"])
 
         for k, v in new_data.model_dump().items():
             if v is not None:

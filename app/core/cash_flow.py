@@ -30,6 +30,7 @@ class CashFlowCli:
             elif action == "f":
                 self.service_repo.find_transactions()
             elif action == "q":
+                print("\nBye!\n")
                 quit()
             else:
                 print("\nInvalid option.\n")
