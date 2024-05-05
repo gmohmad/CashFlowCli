@@ -8,4 +8,5 @@ OPTIONS = {
     "u": "Update existing transaction",
     "f": "Find specific transaction",
     "r": "Remind options",
+    "q": "Quit",
 }

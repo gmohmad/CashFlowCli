@@ -13,7 +13,7 @@ class CashFlowCli:
         self.service_repo.print_options()
 
         while True:
-            action = input("What do you want to do now? (Remind options - r) ")
+            action = input("What do you want to do now? (Remind options - r): ")
 
             if action == "r":
                 self.service_repo.print_options()
@@ -29,5 +29,7 @@ class CashFlowCli:
                 self.service_repo.update_transaction()
             elif action == "f":
                 self.service_repo.find_transactions()
+            elif action == "q":
+                quit()
             else:
                 print("\nInvalid option.\n")
