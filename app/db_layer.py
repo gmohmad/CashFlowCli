@@ -85,6 +85,11 @@ class DBRepo:
             self.update_balance(
                 new_data.Category or transaction["Category"], new_data.Amount
             )
+        if not new_data.Amount and new_data.Category:
+            self.restore_balance(transaction["Category"], transaction["Amount"])
+            self.update_balance(
+                new_data.Category or transaction["Category"], transaction["Amount"]
+            )
 
         for k, v in new_data.model_dump().items():
             if v is not None:

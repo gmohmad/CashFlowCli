@@ -18,7 +18,7 @@ class ValidationRepo:
                 balance = int(balance)
                 return balance
             except ValueError:
-                print("\nBalance should be a non-negative number. Please try again.\n")
+                print("\nBalance should be a valid integer. Please try again.\n")
 
     def get_valid_amount_input(self, required: bool = True) -> int | None:
         """Prompts user for a valid amount input."""
