@@ -4,6 +4,8 @@ from .input_validation import ValidationRepo
 
 
 class ServiceRepo:
+    """Service class"""
+
     def __init__(self) -> None:
         """Initializes repos"""
         self.validation_repo = ValidationRepo()

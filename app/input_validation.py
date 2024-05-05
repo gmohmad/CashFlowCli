@@ -6,16 +6,16 @@ from .schemas import CategoryEnum, TransactionInputSchema, TransactionUpdateSche
 
 
 class ValidationRepo:
+    """Class for user input validation"""
+
     def get_valid_balance_input(self) -> int:
         """Prompts user for a valid balance input."""
         while True:
             balance = input(
-                "Whats your starting balance? (Enter a non-negative number) "
+                "Whats your starting balance? (Should be a valid integer): "
             )
             try:
                 balance = int(balance)
-                if balance < 0:
-                    raise ValueError
                 return balance
             except ValueError:
                 print("\nBalance should be a non-negative number. Please try again.\n")
@@ -23,19 +23,17 @@ class ValidationRepo:
     def get_valid_amount_input(self, required: bool = True) -> int | None:
         """Prompts user for a valid amount input."""
         while True:
-            amount_input = input("\nEnter the amount (A positive number|Cancel -- c): ")
-            if amount_input == "c":
-                return None
-
+            amount_input = input("\nEnter the amount (A positive number): ")
             if not required and amount_input == "":
                 return None
+
             try:
                 amount = int(amount_input)
                 if amount <= 0:
                     raise ValueError
                 return amount
             except ValueError:
-                print("Amount should be a positive number. Please try again.\n")
+                print("\nAmount should be a positive number. Please try again.")
 
     def get_valid_date_input(self, required: bool = True) -> datetime.date | None:
         """Prompts user for a valid date input."""
@@ -50,9 +48,9 @@ class ValidationRepo:
                 date = datetime.datetime.strptime(date_input, "%Y-%m-%d").date()
                 return date
             except ValueError:
-                print("Invalid date format. Please try again.\n")
+                print("\nInvalid date format. Please try again.\n")
 
-    def get_valid_category_input(self, required: bool = True) -> str | None:
+    def get_valid_category_input(self, required: bool = True) -> CategoryEnum | None:
         """Prompts user for a valid category input."""
         while True:
             category_input = input("Enter the category (expenses|incomes): ")
@@ -60,9 +58,9 @@ class ValidationRepo:
                 return None
             try:
                 category = CategoryEnum[category_input.lower()]
-                return category.value
+                return category
             except KeyError:
-                print("Invalid category. Please try again.\n")
+                print("\nInvalid category. Please try again.\n")
 
     def get_valid_id_input(self, db_repo: DBRepo) -> uuid.UUID | None:
         """Prompts user for a valid id input."""
@@ -81,7 +79,7 @@ class ValidationRepo:
 
                 return id
             except ValueError:
-                print("\nInvalid id format. Please try again.\n")
+                print("\nInvalid id format. Please try again.")
 
     def get_transaction_from_input(
         self, required: bool = True

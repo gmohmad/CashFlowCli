@@ -1,5 +1,5 @@
 import uuid
-from .utils import load_data, save_data, restore_db
+from .utils.db_utils import load_data, save_data
 from .schemas import (
     TransactionSchema,
     TransactionInputSchema,
@@ -8,13 +8,14 @@ from .schemas import (
 )
 
 
-DB_PATH = "db/db.json"
+DB_PATH: str = "db/db.json"
 
 
 class DBRepo:
+    """Class for db operations"""
+
     def __init__(self, balance: int) -> None:
-        """Restore db and set up balance and db data"""
-        restore_db(DB_PATH)
+        """Set up balance and db data"""
         self.BALANCE = balance
         self.data = load_data(DB_PATH)
 

@@ -16,8 +16,3 @@ def save_data(filename: str, data: dict) -> None:
     """Saves data to db file"""
     with open(filename, "w") as file:
         json.dump(data, file)
-
-
-def restore_db(filename: str) -> None:
-    """Restores db by writing an empty dict to it"""
-    save_data(filename, {})

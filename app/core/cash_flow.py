@@ -2,6 +2,8 @@ from app.service_layer import ServiceRepo
 
 
 class CashFlowCli:
+    """Class that sets everything up and runs the app"""
+
     def __init__(self) -> None:
         """Initialize service repo"""
         self.service_repo = ServiceRepo()
@@ -11,7 +13,7 @@ class CashFlowCli:
         self.service_repo.print_options()
 
         while True:
-            action = input("What do you want to do now? (Remind options - 8) ")
+            action = input("What do you want to do now? (Remind options - r) ")
 
             if action == "r":
                 self.service_repo.print_options()
