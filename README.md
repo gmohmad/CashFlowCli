@@ -9,7 +9,8 @@
 - pydantic for data validation/type hinting
 - 8 possible options, from viewing current balance to filtering transactions
 - full cli experience
-(no test yet, might add them in the future if i have time)
+
+(no tests yet, might add them in the future(using pytest) if i have time)
 
 
 ## Project startup
