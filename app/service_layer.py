@@ -1,4 +1,5 @@
 from config.options import OPTIONS
+
 from .db_layer import DBRepo
 from .input_validation import ValidationRepo
 
@@ -16,7 +17,7 @@ class ServiceRepo:
         print()
 
         if not transactions:
-            print("Nothing found.\n")
+            print('Nothing found.\n')
             return
 
         for id, fields in transactions.items():
@@ -27,7 +28,7 @@ class ServiceRepo:
 
     def print_options(self) -> None:
         """Prints options"""
-        print("Here are possible options:\n")
+        print('Here are possible options:\n')
         for key, value in OPTIONS.items():
             print(f"{value} -- {key}")
         print()
@@ -50,7 +51,7 @@ class ServiceRepo:
 
         self.db_repo.create_transaction(transaction)
 
-        print("\nTransaction was successfully created!\n")
+        print('\nTransaction was successfully created!\n')
 
     def update_transaction(self) -> None:
         """Promts user to enter data and updates the transaction based on it"""
@@ -62,18 +63,18 @@ class ServiceRepo:
 
         self.db_repo.update_transaction(id, transaction)
 
-        print("\nTransaction was successfully updated!\n")
+        print('\nTransaction was successfully updated!\n')
 
     def find_transactions(self) -> None:
         """Promts user to enter pattern and filters transactions based on it"""
         pattern = input(
-            "Enter date, amount or category of transactions you want to find: "
+            'Enter date, amount or category of transactions you want to find: '
         )
 
         queryset = self.db_repo.filter_transactions(pattern)
 
         if not queryset:
-            print("\nNo matches!\n")
+            print('\nNo matches!\n')
             return
 
         self._print_transactions(queryset)

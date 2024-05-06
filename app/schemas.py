@@ -1,20 +1,21 @@
 import uuid
-from enum import Enum
 from datetime import date
+from enum import Enum
+
 from pydantic import BaseModel, field_serializer
 
 
 class CategoryEnum(str, Enum):
     """Enum for transaction category field"""
 
-    incomes = "Incomes"
-    expenses = "Expenses"
+    incomes = 'Incomes'
+    expenses = 'Expenses'
 
 
 class BaseTransactionSchema(BaseModel):
     """Base transaction schema"""
 
-    @field_serializer("Date", check_fields=False)
+    @field_serializer('Date', check_fields=False)
     def serialize_date(self, date: date) -> str:
         """Converts date to a string"""
         return str(date)
