@@ -9,8 +9,7 @@ class ServiceRepo:
 
     def __init__(self) -> None:
         """Initializes repos"""
-        self.validation_repo = ValidationRepo()
-        self.db_repo = DBRepo(self.validation_repo.get_valid_balance_input())
+        self.db_repo = DBRepo(ValidationRepo.get_valid_balance_input())
 
     def _print_transactions(self, transactions: dict) -> None:
         """Prints transactions"""
@@ -47,7 +46,7 @@ class ServiceRepo:
 
     def add_new_transaction(self) -> None:
         """Promts user to enter data and creates a transaction based on it"""
-        transaction = self.validation_repo.get_transaction_from_input()
+        transaction = ValidationRepo.get_transaction_from_input()
 
         self.db_repo.create_transaction(transaction)
 
@@ -55,11 +54,11 @@ class ServiceRepo:
 
     def update_transaction(self) -> None:
         """Promts user to enter data and updates the transaction based on it"""
-        id = self.validation_repo.get_valid_id_input(self.db_repo)
+        id = ValidationRepo.get_valid_id_input(self.db_repo)
         if id is None:
             print()
             return
-        transaction = self.validation_repo.get_transaction_from_input(required=False)
+        transaction = ValidationRepo.get_transaction_from_input(required=False)
 
         self.db_repo.update_transaction(id, transaction)
 

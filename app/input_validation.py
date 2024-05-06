@@ -8,7 +8,8 @@ from .schemas import CategoryEnum, TransactionInputSchema, TransactionUpdateSche
 class ValidationRepo:
     """Class for user input validation"""
 
-    def get_valid_balance_input(self) -> int:
+    @staticmethod
+    def get_valid_balance_input() -> int:
         """Prompts user for a valid balance input."""
         while True:
             balance = input(
@@ -20,7 +21,8 @@ class ValidationRepo:
             except ValueError:
                 print("\nBalance should be a valid integer. Please try again.\n")
 
-    def get_valid_amount_input(self, required: bool = True) -> int | None:
+    @staticmethod
+    def get_valid_amount_input(required: bool = True) -> int | None:
         """Prompts user for a valid amount input."""
         while True:
             amount_input = input("\nEnter the amount (A positive number): ")
@@ -35,7 +37,8 @@ class ValidationRepo:
             except ValueError:
                 print("\nAmount should be a positive number. Please try again.")
 
-    def get_valid_date_input(self, required: bool = True) -> datetime.date | None:
+    @staticmethod
+    def get_valid_date_input(required: bool = True) -> datetime.date | None:
         """Prompts user for a valid date input."""
         while True:
             date_input = input("Enter the date (YYYY-MM-DD) or type 't' to autofill: ")
@@ -50,7 +53,8 @@ class ValidationRepo:
             except ValueError:
                 print("\nInvalid date format. Please try again.\n")
 
-    def get_valid_category_input(self, required: bool = True) -> CategoryEnum | None:
+    @staticmethod
+    def get_valid_category_input(required: bool = True) -> CategoryEnum | None:
         """Prompts user for a valid category input."""
         while True:
             category_input = input("Enter the category (expenses|incomes): ")
@@ -62,7 +66,8 @@ class ValidationRepo:
             except KeyError:
                 print("\nInvalid category. Please try again.\n")
 
-    def get_valid_id_input(self, db_repo: DBRepo) -> uuid.UUID | None:
+    @staticmethod
+    def get_valid_id_input(db_repo: DBRepo) -> uuid.UUID | None:
         """Prompts user for a valid id input."""
         while True:
             try:
@@ -81,15 +86,16 @@ class ValidationRepo:
             except ValueError:
                 print("\nInvalid id format. Please try again.")
 
+    @staticmethod
     def get_transaction_from_input(
-        self, required: bool = True
+        required: bool = True,
     ) -> TransactionInputSchema | TransactionUpdateSchema | None:
         """Builds a transaction based on the user's input and returns it"""
         Schema = TransactionInputSchema if required else TransactionUpdateSchema
 
-        amount = self.get_valid_amount_input(required=required)
-        category = self.get_valid_category_input(required=required)
-        date = self.get_valid_date_input(required=required)
+        amount = ValidationRepo.get_valid_amount_input(required=required)
+        category = ValidationRepo.get_valid_category_input(required=required)
+        date = ValidationRepo.get_valid_date_input(required=required)
         description = input("Enter description (Or leave blank): ")
 
         transaction = Schema(
