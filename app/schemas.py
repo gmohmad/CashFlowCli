@@ -20,6 +20,11 @@ class BaseTransactionSchema(BaseModel):
         """Converts date to a string"""
         return None if date is None else str(date)
 
+    @field_serializer("Category", check_fields=False)
+    def serialize_category(self, category: CategoryEnum) -> str | None:
+        """Converts category to a string"""
+        return None if category is None else category.value
+
 
 class BaseInputOutputTransactionSchema(BaseTransactionSchema):
     """Base schema for transaction input/output"""
