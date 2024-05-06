@@ -47,9 +47,6 @@ class ServiceRepo:
     def add_new_transaction(self) -> None:
         """Promts user to enter data and creates a transaction based on it"""
         transaction = self.validation_repo.get_transaction_from_input()
-        if transaction is None:
-            print()
-            return
 
         self.db_repo.create_transaction(transaction)
 

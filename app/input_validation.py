@@ -87,18 +87,9 @@ class ValidationRepo:
         """Builds a transaction based on the user's input and returns it"""
         Schema = TransactionInputSchema if required else TransactionUpdateSchema
 
-        if required:
-            amount = self.get_valid_amount_input()
-            if amount is None:
-                return None
-            category = self.get_valid_category_input()
-            date = self.get_valid_date_input()
-
-        if not required:
-            amount = self.get_valid_amount_input(required=False)
-            category = self.get_valid_category_input(required=False)
-            date = self.get_valid_date_input(required=False)
-
+        amount = self.get_valid_amount_input(required=required)
+        category = self.get_valid_category_input(required=required)
+        date = self.get_valid_date_input(required=required)
         description = input("Enter description (Or leave blank): ")
 
         transaction = Schema(
