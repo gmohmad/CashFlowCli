@@ -8,17 +8,17 @@ from pydantic import BaseModel, field_serializer
 class CategoryEnum(str, Enum):
     """Enum for transaction category field"""
 
-    incomes = 'Incomes'
-    expenses = 'Expenses'
+    incomes = "Incomes"
+    expenses = "Expenses"
 
 
 class BaseTransactionSchema(BaseModel):
     """Base transaction schema"""
 
-    @field_serializer('Date', check_fields=False)
-    def serialize_date(self, date: date) -> str:
+    @field_serializer("Date", check_fields=False)
+    def serialize_date(self, date: date) -> str | None:
         """Converts date to a string"""
-        return str(date)
+        return None if date is None else str(date)
 
 
 class BaseInputOutputTransactionSchema(BaseTransactionSchema):

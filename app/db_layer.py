@@ -8,7 +8,7 @@ from .schemas import (
 )
 from .utils.db_utils import load_data, save_data
 
-DB_PATH: str = 'db/db.json'
+DB_PATH: str = "db/db.json"
 
 
 class DBRepo:
@@ -34,19 +34,19 @@ class DBRepo:
             self.BALANCE += amount
 
     def get_balance(self) -> int:
-        'Returns the balance'
+        "Returns the balance"
         return self.BALANCE
 
     def get_incomes(self) -> dict[uuid.UUID, TransactionSchema]:
         """Returns a dict containing incomes"""
         return {
-            k: v for k, v in self.data.items() if v['Category'] == CategoryEnum.incomes
+            k: v for k, v in self.data.items() if v["Category"] == CategoryEnum.incomes
         }
 
     def get_expenses(self) -> dict[uuid.UUID, TransactionSchema]:
         """Returns a dict containing expenses"""
         return {
-            k: v for k, v in self.data.items() if v['Category'] == CategoryEnum.expenses
+            k: v for k, v in self.data.items() if v["Category"] == CategoryEnum.expenses
         }
 
     def get_transaction_by_id(self, id: uuid.UUID) -> TransactionSchema | None:
@@ -58,9 +58,9 @@ class DBRepo:
         return {
             k: v
             for k, v in self.data.items()
-            if v['Category'].lower() == pattern.lower()
-            or str(v['Amount']) == pattern
-            or v['Date'] == pattern
+            if v["Category"].lower() == pattern.lower()
+            or str(v["Amount"]) == pattern
+            or v["Date"] == pattern
         }
 
     def create_transaction(self, data: TransactionInputSchema) -> None:
@@ -78,13 +78,13 @@ class DBRepo:
         transaction = self.get_transaction_by_id(id)
 
         if new_data.Amount:
-            self.restore_balance(transaction['Category'], transaction['Amount'])
+            self.restore_balance(transaction["Category"], transaction["Amount"])
             self.update_balance(
-                new_data.Category or transaction['Category'], new_data.Amount
+                new_data.Category or transaction["Category"], new_data.Amount
             )
         elif new_data.Category:
-            self.restore_balance(transaction['Category'], transaction['Amount'])
-            self.update_balance(new_data.Category, transaction['Amount'])
+            self.restore_balance(transaction["Category"], transaction["Amount"])
+            self.update_balance(new_data.Category, transaction["Amount"])
 
         for k, v in new_data.model_dump().items():
             if v is not None:
