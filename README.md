@@ -11,7 +11,10 @@
 - full cli experience
 
 (no tests yet, might add them in the future(using pytest) if i have time)
+<br><br>
 
+### Python version >= 3.10
+<br>
 
 ## Project startup
 
